@@ -1,7 +1,8 @@
 import { LoginPayload, RegisterPayload } from "@/types/auth";
+import { TaskPayload } from "@/types/tasks";
 import { getAccessToken } from "@/utils/accessToken";
 
-type Payload = LoginPayload | RegisterPayload | undefined;
+type Payload = LoginPayload | RegisterPayload | TaskPayload | undefined;
 
 const buildHeaders = (): Record<string, string> => {
   const token = getAccessToken();

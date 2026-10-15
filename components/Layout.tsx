@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Sidebar, { type TabType } from "@/components/Sidebar";
 import Dashboard from "./Dashboard";
+import AddTask from "./AddTask";
 
 export default function Layout() {
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");
@@ -14,6 +15,7 @@ export default function Layout() {
       </aside>
       <main className="min-w-0 flex-1 px-5 py-4">
         {activeTab === "dashboard" && <Dashboard />}
+        {activeTab === "add-task" && <AddTask />}
       </main>
     </div>
   );

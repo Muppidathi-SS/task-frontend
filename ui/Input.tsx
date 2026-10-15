@@ -13,7 +13,7 @@ export default function Input({
 }: InputProps) {
   return (
     <>
-      <div className="w-full px-6 py-3 border border-gray-300 rounded-xl">
+      <div className="w-full px-6 py-3 border border-gray-300 rounded-xl shadow-sm">
         <input
           className="w-full border-none focus:outline-none"
           type={type}

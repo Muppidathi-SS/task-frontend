@@ -100,7 +100,9 @@ export default function Table() {
         <thead className="bg-gray-100 text-gray-700">
           <tr>
             {columnNames.map((col) => (
-              <th className="px-6 py-3 font-semibold">Task Name</th>
+              <th key={col} className="px-6 py-3 font-semibold">
+                {col}
+              </th>
             ))}
           </tr>
         </thead>
