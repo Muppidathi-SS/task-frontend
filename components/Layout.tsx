@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Sidebar, { type TabType } from "@/components/Sidebar";
 import Dashboard from "./Dashboard";
-import AddTask from "./AddTask";
+import AddTask from "./TaskForm";
 
 export default function Layout() {
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");

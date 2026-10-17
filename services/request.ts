@@ -40,3 +40,6 @@ export const get = (path: string) => request("GET", path, undefined);
 
 export const post = (path: string, body: Payload) =>
   request("POST", path, body);
+
+export const put = (path: string, body: Payload) =>
+  request("PUT", path, body);

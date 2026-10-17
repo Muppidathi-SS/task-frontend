@@ -1,8 +1,15 @@
 "use client";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { taskApi } from "@/services/tasks/task";
+import { TaskPayload } from "@/types/tasks";
 
-export default function useTasks() {
+interface UpdateTaskVariables {
+  task_id: string;
+  payload: TaskPayload;
+}
+
+export default function useTasks(task_id?: string) {
   const queryClient = useQueryClient();
 
   const getTasks = useQuery({
@@ -10,14 +17,34 @@ export default function useTasks() {
     queryFn: taskApi.getTasks,
   });
 
+  const getTaskById = useQuery({
+    queryKey: ["task", task_id],
+    queryFn: () => taskApi.getTaskById(task_id!),
+    enabled: !!task_id,
+  });
+
   const addTaskMutation = useMutation({
     mutationFn: taskApi.postTask,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
+
+  const updateTaskMutation = useMutation({
+    mutationFn: ({ task_id, payload }: UpdateTaskVariables) =>
+      taskApi.updateTask(task_id, payload),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
       queryClient.invalidateQueries({
-        queryKey: ["tasks"],
+        queryKey: ["task", variables.task_id],
       });
     },
   });
 
-  return { getTasks, addTaskMutation };
+  return {
+    getTasks,
+    getTaskById,
+    addTaskMutation,
+    updateTaskMutation,
+  };
 }
