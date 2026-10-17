@@ -5,6 +5,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import Button from "@/ui/Button";
 import Input from "@/ui/Input";
+import LoadingPopup from "@/ui/LoadingPopup";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("");
@@ -35,6 +36,7 @@ export default function Login() {
         />
         <Button buttonLabel="Login" onClick={handleLogin} />
       </div>
+      {loginMutation.isPending && <LoadingPopup />}
     </>
   );
 }

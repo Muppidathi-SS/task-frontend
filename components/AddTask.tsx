@@ -16,6 +16,7 @@ import {
   priorityOptions,
   statusOptions,
 } from "@/constants/tasks";
+import LoadingPopup from "@/ui/LoadingPopup";
 
 export default function AddTask() {
   const { addTaskMutation } = useTasks();
@@ -31,7 +32,7 @@ export default function AddTask() {
     setTaskName("");
     setStatus("pending");
     setPriority("medium");
-    setCategory("");
+    setCategory("Learning");
     setFocused("False");
     setFocusDueDate(undefined);
   };
@@ -51,7 +52,7 @@ export default function AddTask() {
 
   return (
     <>
-      <div className="w-134 gap-2 flex flex-col">
+      <div className="w-full gap-4 flex flex-col">
         <Input
           type="text"
           placeholder={addTaskForm.placeholder}
@@ -81,6 +82,7 @@ export default function AddTask() {
         <DatePicker value={focusDueDate} onChange={setFocusDueDate} />
         <Button buttonLabel={addTaskForm.buttonLabelName} onClick={handleAdd} />
       </div>
+      {addTaskMutation.isPending && <LoadingPopup />}
     </>
   );
 }

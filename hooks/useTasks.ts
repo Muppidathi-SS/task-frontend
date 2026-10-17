@@ -8,7 +8,6 @@ export default function useTasks() {
   const getTasks = useQuery({
     queryKey: ["tasks"],
     queryFn: taskApi.getTasks,
-    enabled: false,
   });
 
   const addTaskMutation = useMutation({

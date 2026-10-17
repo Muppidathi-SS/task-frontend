@@ -1,8 +1,7 @@
 "use client";
 
+import { Icons } from "@/icons/icons";
 import { useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 interface DropDownProps {
   value: string;
@@ -25,7 +24,7 @@ export default function Dropdown({
       >
         {value}
         <span className="cursor-pointer">
-          {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          {open ? <Icons.DownIcon /> : <Icons.UpIcon />}
         </span>
       </button>
 

@@ -1,7 +1,6 @@
 "use client";
 
-import { LayoutDashboard } from "lucide-react";
-import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import { Icons } from "@/icons/icons";
 
 export type TabType = "dashboard" | "add-task";
 
@@ -15,12 +14,12 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
     {
       id: "dashboard" as TabType,
       label: "Dashboard",
-      icon: LayoutDashboard,
+      icon: Icons.DashboardIcon,
     },
     {
       id: "add-task" as TabType,
       label: "Add Task",
-      icon: ControlPointIcon,
+      icon: Icons.AddTaskIcon,
     },
   ];
 
