@@ -12,14 +12,14 @@ interface SidebarProps {
 export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   const menuItems = [
     {
-      id: "dashboard" as TabType,
-      label: "Dashboard",
-      icon: Icons.DashboardIcon,
-    },
-    {
       id: "add-task" as TabType,
       label: "Add Task",
       icon: Icons.AddTaskIcon,
+    },
+    {
+      id: "dashboard" as TabType,
+      label: "Dashboard",
+      icon: Icons.DashboardIcon,
     },
   ];
 

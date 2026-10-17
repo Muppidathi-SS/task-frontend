@@ -75,17 +75,26 @@ export default function TaskForm({ mode, task, onClose }: TaskFormProps) {
       focus_due_date: focusDueDate ? format(focusDueDate, "yyyy-MM-dd") : null,
     };
 
-    if (mode == "add") {
+    if (mode === "add") {
       addTaskMutation.mutate(payload, {
-        onSuccess: clearForm,
+        onSuccess: () => {
+          clearForm();
+          onClose();
+        },
       });
     } else {
-      updateTaskMutation.mutate({
-        task_id: task?.task_id || "",
-        payload,
-      });
+      updateTaskMutation.mutate(
+        {
+          task_id: task?.task_id || "",
+          payload,
+        },
+        {
+          onSuccess: () => {
+            onClose();
+          },
+        },
+      );
     }
-    onClose();
   };
 
   return (

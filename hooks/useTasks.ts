@@ -25,8 +25,10 @@ export default function useTasks(task_id?: string) {
 
   const addTaskMutation = useMutation({
     mutationFn: taskApi.postTask,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
     },
   });
 
@@ -54,6 +56,6 @@ export default function useTasks(task_id?: string) {
     getTaskById,
     addTaskMutation,
     updateTaskMutation,
-    deleteTaskMutation
+    deleteTaskMutation,
   };
 }
