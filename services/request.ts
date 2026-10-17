@@ -43,3 +43,5 @@ export const post = (path: string, body: Payload) =>
 
 export const put = (path: string, body: Payload) =>
   request("PUT", path, body);
+
+export const del = (path: string) => request("DELETE", path, undefined);

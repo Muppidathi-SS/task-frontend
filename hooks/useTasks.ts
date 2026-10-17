@@ -41,10 +41,19 @@ export default function useTasks(task_id?: string) {
     },
   });
 
+  const deleteTaskMutation = useMutation({
+    mutationFn: (task_id: string) => taskApi.deleteTask(task_id),
+    onSuccess: (_, task_id) => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.removeQueries({ queryKey: ["task", task_id] });
+    },
+  });
+
   return {
     getTasks,
     getTaskById,
     addTaskMutation,
     updateTaskMutation,
+    deleteTaskMutation
   };
 }

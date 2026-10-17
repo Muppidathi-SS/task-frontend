@@ -1,5 +1,5 @@
 import { TaskPayload } from "@/types/tasks";
-import { get, post, put } from "../request";
+import { del, get, post, put } from "../request";
 
 export const taskApi = {
   getTasks: async function getTasks() {
@@ -16,5 +16,8 @@ export const taskApi = {
   },
   updateTask: async function updateTask(task_id: string, payload: TaskPayload) {
     return put(`/api/tasks/${task_id}`, payload);
+  },
+  deleteTask: async function deleteTask(task_id: string) {
+    return del(`/api/tasks/${task_id}`);
   },
 };

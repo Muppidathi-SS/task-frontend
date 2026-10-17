@@ -1,5 +1,6 @@
 import { Icons } from "@/icons/icons";
 import { TaskResponse, TaskResponseList } from "@/types/tasks";
+import { format, isValid } from "date-fns";
 
 const columnNames = [
   "Task Name",
@@ -38,7 +39,12 @@ export default function Table({ rows, onClick }: TableProps) {
               <td className="px-6 py-4">{task.status}</td>
               <td className="px-6 py-4 text-gray-900">{task.priority}</td>
               <td className="px-6 py-4 text-gray-900">{task.category_name}</td>
-              <td className="px-6 py-4 text-gray-900">{task.focus_due_date}</td>
+              <td className="px-6 py-4 text-gray-900">
+                {" "}
+                {task.focus_due_date && isValid(task.focus_due_date)
+                  ? format(task.focus_due_date, "dd MMM yyyy")
+                  : "-"}
+              </td>
               <td className="px-6 py-4">
                 <div className="flex justify-center gap-2">
                   <button
@@ -46,6 +52,12 @@ export default function Table({ rows, onClick }: TableProps) {
                     className="cursor-pointer rounded-[10px] border border-gray-400 p-1.5 text-gray-400 shadow-md"
                   >
                     <Icons.EditIcon />
+                  </button>
+                  <button
+                    onClick={() => onClick("delete", task.task_id)}
+                    className="cursor-pointer rounded-[10px] border border-red-400 p-1.5 text-red-400 shadow-md"
+                  >
+                    <Icons.DeleteIcon />
                   </button>
                 </div>
               </td>

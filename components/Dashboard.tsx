@@ -12,30 +12,46 @@ import useTasks from "@/hooks/useTasks";
 type Mode = "edit" | "delete" | "add" | null;
 
 export default function Dashboard() {
-  const [selecetedTask, setSelectedTask] = useState<TaskResponse | null>(null);
+  const [selectedTask, setSelectedTask] = useState<TaskResponse | null>(null);
   const [mode, setMode] = useState<Mode>(null);
   const [selectedTaskId, setSelectedTaskId] = useState("");
-  const { getTasks, getTaskById } = useTasks(selectedTaskId);
-  const { data: rows } = getTasks;
+
+  const { getTasks, getTaskById, deleteTaskMutation } =
+    useTasks(selectedTaskId);
+
+  const { data: rows, isPending: isTasksLoading } = getTasks;
   const { data: taskData, isPending: isTaskLoading } = getTaskById;
 
   const handleAction = (action: "edit" | "delete", id: string) => {
     if (action === "edit") {
+      setSelectedTask(null);
       setSelectedTaskId(id);
       setMode("edit");
+      return;
     }
 
     if (action === "delete") {
-      setMode("delete");
+      deleteTaskMutation.mutate(id);
     }
   };
+
   useEffect(() => {
-    if (mode === "edit" && taskData) {
-      const task = taskData.data[0];
-      setSelectedTask(task);
-      console.log(task);
+    if (mode === "edit" && taskData?.data) {
+      const task = Array.isArray(taskData.data)
+        ? taskData.data[0]
+        : taskData.data;
+
+      if (task) {
+        setSelectedTask(task);
+      }
     }
   }, [taskData, mode]);
+
+  const closePopup = () => {
+    setMode(null);
+    setSelectedTaskId("");
+    setSelectedTask(null);
+  };
 
   return (
     <>
@@ -48,31 +64,34 @@ export default function Dashboard() {
           />
         </div>
       </div>
+
       <div className="mt-4">
         <Table rows={rows?.data ?? []} onClick={handleAction} />
       </div>
 
-      {mode === "edit" && selectedTaskId && (
-        <Popup title="Edit Task" onClose={() => setMode(null)}>
-          {selecetedTask ? (
+      {mode === "edit" && (
+        <Popup title="Edit Task" onClose={closePopup}>
+          {isTaskLoading || !selectedTask ? (
+            <LoadingPopup />
+          ) : (
             <TaskForm
               mode="edit"
-              task={selecetedTask}
-              onClose={() => setMode(null)}
+              task={selectedTask}
+              onClose={closePopup}
             />
-          ) : (
-            <LoadingPopup />
           )}
         </Popup>
       )}
+
       {mode === "add" && (
-        <Popup
-          title="Add Task"
-          onClose={() => setMode(null)}
-          children={<TaskForm mode={"add"} onClose={() => setMode(null)} />}
-        />
+        <Popup title="Add Task" onClose={closePopup}>
+          <TaskForm mode="add" onClose={closePopup} />
+        </Popup>
       )}
-      {getTasks.isPending && <LoadingPopup />}
+
+      {(isTasksLoading || deleteTaskMutation.isPending) && (
+        <LoadingPopup />
+      )}
     </>
   );
 }
