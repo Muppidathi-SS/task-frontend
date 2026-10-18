@@ -2,7 +2,7 @@
 
 import { Icons } from "@/icons/icons";
 
-export type TabType = "dashboard" | "add-task";
+export type TabType = "dashboard" | "add-task" | "home";
 
 interface SidebarProps {
   activeTab: TabType;
@@ -21,6 +21,11 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
       label: "Dashboard",
       icon: Icons.DashboardIcon,
     },
+    {
+      id:'home' as TabType,
+      label: "Home",
+      icon:Icons.HomeIcon
+    }
   ];
 
   return (

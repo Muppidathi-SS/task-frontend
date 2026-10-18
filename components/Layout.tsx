@@ -5,12 +5,13 @@ import Sidebar, { type TabType } from "@/components/Sidebar";
 import Dashboard from "./Dashboard";
 import Popup from "@/ui/Popup";
 import TaskForm from "./TaskForm";
+import Home from "./Home";
 
 export default function Layout() {
-  const [activeTab, setActiveTab] = useState<TabType>("dashboard");
+  const [activeTab, setActiveTab] = useState<TabType>("home");
 
   return (
-    <div className="flex min-h-screen w-full bg-white text-black">
+    <div className="flex min-h-screen w-full bg-[#F4F5F7] text-black">
       <aside className="sticky top-0 flex h-screen w-104 shrink-0 flex-col border-r border-gray-200 bg-white">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       </aside>
@@ -21,6 +22,7 @@ export default function Layout() {
           </Popup>
         )}
         {activeTab === "dashboard" && <Dashboard />}
+        {activeTab === "home" && <Home />}
       </main>
     </div>
   );
