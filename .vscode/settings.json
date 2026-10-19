@@ -1,0 +1,9 @@
+{
+  "editor.colorDecorators": true,
+  "editor.defaultColorDecorators": "always",
+  "editor.colorDecoratorsActivatedOn": "always",
+
+  "tailwindCSS.colorDecorators": true,
+  "tailwindCSS.classFunctions": ["clsx", "cn", "cva"],
+  "tailwindCSS.validate": true
+}

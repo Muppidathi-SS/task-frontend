@@ -8,6 +8,9 @@ import LoadingPopup from "@/ui/LoadingPopup";
 import { TaskResponse } from "@/types/tasks";
 import TaskForm from "./TaskForm";
 import useTasks from "@/hooks/useTasks";
+import StatusCard from "./StatusCard";
+import ShowTasks from "./ShowTasks";
+import { TODAY, UPCOMING } from "@/constants/home";
 
 type Mode = "edit" | "delete" | "add" | null;
 
@@ -55,7 +58,12 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="flex justify-end">
+      <div className="grid grid-cols-4 gap-4">
+        <div className="col-span-4">
+          <StatusCard />
+        </div>
+      </div>
+      <div className="flex justify-end mt-5">
         <div className="w-50">
           <Button
             buttonLabel="Add Task"
@@ -74,11 +82,7 @@ export default function Dashboard() {
           {isTaskLoading || !selectedTask ? (
             <LoadingPopup />
           ) : (
-            <TaskForm
-              mode="edit"
-              task={selectedTask}
-              onClose={closePopup}
-            />
+            <TaskForm mode="edit" task={selectedTask} onClose={closePopup} />
           )}
         </Popup>
       )}
@@ -89,9 +93,16 @@ export default function Dashboard() {
         </Popup>
       )}
 
-      {(isTasksLoading || deleteTaskMutation.isPending) && (
-        <LoadingPopup />
-      )}
+      {(isTasksLoading || deleteTaskMutation.isPending) && <LoadingPopup />}
+
+      <div className="grid grid-cols-4 gap-4">
+        <div className="col-span-2">
+          <ShowTasks mode={"today"} tasks={TODAY} />
+        </div>
+        <div className="col-span-2">
+          <ShowTasks mode={"update"} tasks={UPCOMING} />
+        </div>
+      </div>
     </>
   );
 }

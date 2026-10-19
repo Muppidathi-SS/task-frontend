@@ -22,10 +22,10 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
       icon: Icons.DashboardIcon,
     },
     {
-      id:'home' as TabType,
+      id: "home" as TabType,
       label: "Home",
-      icon:Icons.HomeIcon
-    }
+      icon: Icons.HomeIcon,
+    },
   ];
 
   return (
@@ -43,7 +43,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
                 : "text-black hover:bg-gray-100"
             }`}
           >
-            <Icon size={19} strokeWidth={1.8} />
+            <Icon sx={{ fontSize: 19 }} />
             <span>{item.label}</span>
           </button>
         );
