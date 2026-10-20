@@ -12,10 +12,12 @@ export default function ShowTasks({ mode, tasks }: ShowTasksProps) {
   return (
     <>
       <div className="w-full flex flex-col bg-white px-3 py-2 rounded-xl shadow mt-4 gap-3 pb-4">
-        <h1 className="font-medium text-[21px]">Today's Tasks</h1>
+        <h1 className="font-medium text-[21px]">
+          {mode === "today" ? "Today's Tasks" : "Upcoming Tasks"}
+        </h1>
         {tasks.map((task, index) => (
           <div key={index} className="flex items-center">
-            <CheckboxInput />
+            {mode === "today" && <CheckboxInput />}
             <p>{task.taskName}</p>
             {mode === "today" && "taskStatus" in task ? (
               <span

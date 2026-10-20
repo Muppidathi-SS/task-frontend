@@ -11,6 +11,7 @@ import useTasks from "@/hooks/useTasks";
 import StatusCard from "./StatusCard";
 import ShowTasks from "./ShowTasks";
 import { TODAY, UPCOMING } from "@/constants/home";
+import tasks from "@/constants/table.json"
 
 type Mode = "edit" | "delete" | "add" | null;
 

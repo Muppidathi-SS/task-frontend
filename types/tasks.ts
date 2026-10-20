@@ -15,7 +15,7 @@ export interface TaskResponse {
   priority: string;
   category_name: string;
   is_focused: boolean;
-  focus_due_date: Date | undefined;
+  focus_due_date: Date | undefined | string | null;
   created_at: string;
   updated_at: string;
 }

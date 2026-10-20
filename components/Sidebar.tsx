@@ -1,8 +1,7 @@
 "use client";
 
+import { menuItems, TabType } from "@/constants/navbar";
 import { Icons } from "@/icons/icons";
-
-export type TabType = "dashboard" | "add-task" | "home";
 
 interface SidebarProps {
   activeTab: TabType;
@@ -10,24 +9,6 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
-  const menuItems = [
-    {
-      id: "add-task" as TabType,
-      label: "Add Task",
-      icon: Icons.AddTaskIcon,
-    },
-    {
-      id: "dashboard" as TabType,
-      label: "Dashboard",
-      icon: Icons.DashboardIcon,
-    },
-    {
-      id: "home" as TabType,
-      label: "Home",
-      icon: Icons.HomeIcon,
-    },
-  ];
-
   return (
     <nav className="flex-1 space-y-2 px-3 py-6">
       {menuItems.map((item) => {

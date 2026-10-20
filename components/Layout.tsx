@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar, { type TabType } from "@/components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import Dashboard from "./Dashboard";
 import Popup from "@/ui/Popup";
 import TaskForm from "./TaskForm";
 import Home from "./Home";
+import { TabType } from "@/constants/navbar";
 
 export default function Layout() {
   const [activeTab, setActiveTab] = useState<TabType>("home");
@@ -22,7 +23,7 @@ export default function Layout() {
           </Popup>
         )}
         {activeTab === "dashboard" && <Dashboard />}
-        {activeTab === "home" && <Home />}
+        {activeTab === "home" && <Dashboard />}
       </main>
     </div>
   );
