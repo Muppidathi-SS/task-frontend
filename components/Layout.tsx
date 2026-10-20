@@ -7,6 +7,7 @@ import Popup from "@/ui/Popup";
 import TaskForm from "./TaskForm";
 import Home from "./Home";
 import { TabType } from "@/constants/navbar";
+import Tasks from "./Task";
 
 export default function Layout() {
   const [activeTab, setActiveTab] = useState<TabType>("home");
@@ -24,6 +25,7 @@ export default function Layout() {
         )}
         {activeTab === "dashboard" && <Dashboard />}
         {activeTab === "home" && <Dashboard />}
+        {activeTab === "tasks" && <Tasks />}
       </main>
     </div>
   );

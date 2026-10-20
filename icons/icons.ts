@@ -9,9 +9,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import { Dashboard } from "@mui/icons-material";
-import CachedIcon from '@mui/icons-material/Cached';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
+import CachedIcon from "@mui/icons-material/Cached";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 export const Icons = {
   CloseIcon,
@@ -27,4 +29,6 @@ export const Icons = {
   WeekIcon: DateRangeOutlinedIcon,
   InprogressIcon: CachedIcon,
   CompletedIcon: TaskAltIcon,
+  TimerIcon: AccessTimeOutlinedIcon,
+  DoneIcon: CheckCircleIcon,
 };
