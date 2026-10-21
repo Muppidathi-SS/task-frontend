@@ -29,16 +29,16 @@ export default function TaskForm({ mode, task, onClose }: TaskFormProps) {
   const { addTaskMutation, updateTaskMutation } = useTasks();
 
   const [taskName, setTaskName] = useState("");
-  const [status, setStatus] = useState("pending");
-  const [priority, setPriority] = useState("medium");
+  const [status, setStatus] = useState("Pending");
+  const [priority, setPriority] = useState("Easy");
   const [category, setCategory] = useState("Learning");
   const [focused, setFocused] = useState("False");
   const [focusDueDate, setFocusDueDate] = useState<Date | undefined>();
 
   const clearForm = () => {
     setTaskName("");
-    setStatus("pending");
-    setPriority("medium");
+    setStatus("Pending");
+    setPriority("Easy");
     setCategory("Learning");
     setFocused("False");
     setFocusDueDate(undefined);
@@ -102,6 +102,7 @@ export default function TaskForm({ mode, task, onClose }: TaskFormProps) {
       <div className="flex w-full flex-col gap-4">
         <Input
           type="text"
+          label="Enter the Name"
           placeholder={addTaskForm.placeholder}
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
@@ -109,29 +110,33 @@ export default function TaskForm({ mode, task, onClose }: TaskFormProps) {
 
         <Dropdown
           value={status}
+          label="Status"
           dropdownValues={statusOptions}
           onChange={setStatus}
         />
 
         <Dropdown
           value={priority}
+          label="Priority"
           dropdownValues={priorityOptions}
           onChange={setPriority}
         />
 
         <Dropdown
           value={category}
+          label="Category"
           dropdownValues={categoryOptions}
           onChange={setCategory}
         />
 
         <Dropdown
           value={focused}
+          label="Is Focused"
           dropdownValues={focusOptions}
           onChange={setFocused}
         />
 
-        <DatePicker value={focusDueDate} onChange={setFocusDueDate} />
+        <DatePicker label="Completion Date" value={focusDueDate} onChange={setFocusDueDate} />
 
         <Button
           buttonLabel={task ? "Update Task" : addTaskForm.buttonLabelName}

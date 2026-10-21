@@ -1,9 +1,26 @@
+
 {
   "editor.colorDecorators": true,
   "editor.defaultColorDecorators": "always",
   "editor.colorDecoratorsActivatedOn": "always",
 
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "on",
+    "strings": "on"
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.acceptSuggestionOnEnter": "on",
+
   "tailwindCSS.colorDecorators": true,
-  "tailwindCSS.classFunctions": ["clsx", "cn", "cva"],
-  "tailwindCSS.validate": true
+  "tailwindCSS.classFunctions": [
+    "clsx",
+    "cn",
+    "cva"
+  ],
+  "tailwindCSS.validate": true,
+
+  "files.associations": {
+    "*.css": "css"
+  }
 }

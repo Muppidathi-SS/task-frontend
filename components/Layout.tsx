@@ -19,8 +19,8 @@ export default function Layout() {
       </aside>
       <main className="min-w-0 flex-1 px-5 py-4">
         {activeTab === "add-task" && (
-          <Popup title="Add Task" onClose={() => setActiveTab("dashboard")}>
-            <TaskForm mode="add" onClose={() => setActiveTab("dashboard")} />
+          <Popup title="Add Task" onClose={() => setActiveTab("home")}>
+            <TaskForm mode="add" onClose={() => setActiveTab("home")} />
           </Popup>
         )}
         {activeTab === "dashboard" && <Dashboard />}
