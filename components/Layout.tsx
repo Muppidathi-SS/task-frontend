@@ -14,7 +14,7 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-screen w-full bg-[#F4F5F7] text-black">
-      <aside className="sticky top-0 flex h-screen w-104 shrink-0 flex-col border-r border-gray-200 bg-white">
+      <aside className="sticky top-0 flex h-screen w-84 shrink-0 flex-col border-r border-gray-200 bg-white">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       </aside>
       <main className="min-w-0 flex-1 px-5 py-4">

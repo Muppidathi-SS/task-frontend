@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { format, parseISO, isValid } from "date-fns";
+import { format } from "date-fns";
 
 import useTasks from "@/hooks/useTasks";
 
@@ -16,8 +16,8 @@ import {
   priorityOptions,
   statusOptions,
 } from "@/constants/tasks";
-import LoadingPopup from "@/ui/LoadingPopup";
 import { TaskResponse } from "@/types/tasks";
+import Loading from "@/ui/Loading";
 
 interface TaskFormProps {
   mode: string;
@@ -136,7 +136,11 @@ export default function TaskForm({ mode, task, onClose }: TaskFormProps) {
           onChange={setFocused}
         />
 
-        <DatePicker label="Completion Date" value={focusDueDate} onChange={setFocusDueDate} />
+        <DatePicker
+          label="Completion Date"
+          value={focusDueDate}
+          onChange={setFocusDueDate}
+        />
 
         <Button
           buttonLabel={task ? "Update Task" : addTaskForm.buttonLabelName}
@@ -144,7 +148,12 @@ export default function TaskForm({ mode, task, onClose }: TaskFormProps) {
         />
       </div>
 
-      {addTaskMutation.isPending && <LoadingPopup />}
+      {addTaskMutation.isPending && (
+        <div className="w-full h-full flex flex-col justify-center items-center">
+          <h1 className="text-2xl font-medium text-gray-800">Loadin.</h1>
+          <Loading />
+        </div>
+      )}
     </>
   );
 }

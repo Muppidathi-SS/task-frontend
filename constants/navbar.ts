@@ -3,11 +3,6 @@ export type TabType = "dashboard" | "add-task" | "home" | "tasks";
 
 export const menuItems = [
   {
-    id: "add-task" as TabType,
-    label: "Add Task",
-    icon: Icons.AddTaskIcon,
-  },
-  {
     id: "home" as TabType,
     label: "Home",
     icon: Icons.HomeIcon,

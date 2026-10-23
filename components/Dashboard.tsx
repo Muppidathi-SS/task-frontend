@@ -4,14 +4,13 @@ import { useEffect, useState } from "react";
 import Table from "@/ui/Table";
 import Button from "@/ui/Button";
 import Popup from "@/ui/Popup";
-import LoadingPopup from "@/ui/LoadingPopup";
 import { TaskResponse } from "@/types/tasks";
 import TaskForm from "./TaskForm";
 import useTasks from "@/hooks/useTasks";
 import StatusCard from "./StatusCard";
 import ShowTasks from "./ShowTasks";
 import { TODAY, UPCOMING } from "@/constants/home";
-import tasks from "@/constants/table.json"
+import Loading from "@/ui/Loading";
 
 type Mode = "edit" | "delete" | "add" | null;
 
@@ -59,51 +58,67 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-4">
-        <div className="col-span-4">
-          <StatusCard />
+      {isTasksLoading || deleteTaskMutation.isPending ? (
+        <div className="w-full h-full flex flex-col justify-center items-center">
+          <h1 className="text-2xl font-medium text-gray-800">Loading...</h1>
+          <Loading />
         </div>
-      </div>
-      <div className="flex justify-end mt-5">
-        <div className="w-50">
-          <Button
-            buttonLabel="Add Task"
-            icon={true}
-            onClick={() => setMode("add")}
-          />
-        </div>
-      </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-4 gap-4">
+            <div className="col-span-4">
+              <StatusCard />
+            </div>
+          </div>
+          <div className="flex justify-end mt-5">
+            <div className="w-50">
+              <Button
+                buttonLabel="Add Task"
+                icon={true}
+                onClick={() => setMode("add")}
+              />
+            </div>
+          </div>
 
-      <div className="mt-4">
-        <Table rows={rows?.data ?? []} onClick={handleAction} />
-      </div>
+          <div className="mt-4">
+            <Table rows={rows?.data ?? []} onClick={handleAction} />
+          </div>
 
-      {mode === "edit" && (
-        <Popup title="Edit Task" onClose={closePopup}>
-          {isTaskLoading || !selectedTask ? (
-            <LoadingPopup />
-          ) : (
-            <TaskForm mode="edit" task={selectedTask} onClose={closePopup} />
+          {mode === "edit" && (
+            <Popup title="Edit Task" onClose={closePopup}>
+              {isTaskLoading || !selectedTask ? (
+                <div className="w-full h-full flex flex-col justify-center items-center">
+                  <h1 className="text-2xl font-medium text-gray-800">
+                    Loading...
+                  </h1>
+                  <Loading />
+                </div>
+              ) : (
+                <TaskForm
+                  mode="edit"
+                  task={selectedTask}
+                  onClose={closePopup}
+                />
+              )}
+            </Popup>
           )}
-        </Popup>
+
+          {mode === "add" && (
+            <Popup title="Add Task" onClose={closePopup}>
+              <TaskForm mode="add" onClose={closePopup} />
+            </Popup>
+          )}
+
+          <div className="grid grid-cols-4 gap-4">
+            <div className="col-span-2">
+              <ShowTasks mode={"today"} tasks={TODAY} />
+            </div>
+            <div className="col-span-2">
+              <ShowTasks mode={"update"} tasks={UPCOMING} />
+            </div>
+          </div>
+        </>
       )}
-
-      {mode === "add" && (
-        <Popup title="Add Task" onClose={closePopup}>
-          <TaskForm mode="add" onClose={closePopup} />
-        </Popup>
-      )}
-
-      {(isTasksLoading || deleteTaskMutation.isPending) && <LoadingPopup />}
-
-      <div className="grid grid-cols-4 gap-4">
-        <div className="col-span-2">
-          <ShowTasks mode={"today"} tasks={TODAY} />
-        </div>
-        <div className="col-span-2">
-          <ShowTasks mode={"update"} tasks={UPCOMING} />
-        </div>
-      </div>
     </>
   );
 }
